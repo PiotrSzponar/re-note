@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 const Button = styled.button`
     width: 220px;
     height: 50px;
-    background-color: ${({ theme }) => theme.primary};
+    background-color: ${({ theme }) => theme.note};
     padding: 0;
     border: none;
     border-radius: 50px;
@@ -11,13 +11,14 @@ const Button = styled.button`
     font-weight: ${({ theme }) => theme.bold};
     font-size: ${({ theme }) => theme.fontSize.s};
     text-transform: uppercase;
+    cursor: pointer;
 
     ${({ secondary }) =>
         secondary &&
         css`
-            background-color: ${({ theme }) => theme.grey200};
             width: 110px;
             height: 30px;
+            background-color: ${({ theme }) => theme.grey200};
             font-size: ${({ theme }) => theme.fontSize.xxs};
         `}
 `;
