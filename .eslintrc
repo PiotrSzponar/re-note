@@ -12,6 +12,7 @@
     },
     "rules": {
         "import/prefer-default-export": 0,
+        "import/no-extraneous-dependencies": 1,
         "react/jsx-filename-extension": [
             1,
             {
