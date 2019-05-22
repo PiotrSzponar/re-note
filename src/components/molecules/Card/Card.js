@@ -8,7 +8,7 @@ import LinkIcon from 'assets/icons/link.svg';
 
 const StyledWrapper = styled.div`
     min-height: 380px;
-    border-radius: 10px;
+    border-radius: 5px;
     overflow: hidden;
     box-shadow: 0 10px 30px -10px hsla(0, 0%, 0%, 0.1);
     display: grid;
@@ -47,6 +47,7 @@ const StyledHeading = styled(Heading)`
 const StyledAvatar = styled.img`
     width: 100px;
     height: 100px;
+    background-color: hsl(0, 0%, 100%);
     position: absolute;
     right: 25px;
     top: 20px;
@@ -69,25 +70,27 @@ const StyledLinkButton = styled.a`
     border-radius: 50%;
 `;
 
-const Card = ({ cardType }) => (
+const Card = ({
+    cardType,
+    title,
+    created,
+    twitterName,
+    articleUrl,
+    content,
+}) => (
     <StyledWrapper>
         <InnerWrapper activeColor={cardType}>
-            <StyledHeading>Heading one</StyledHeading>
-            <DateInfo>3 days</DateInfo>
+            <StyledHeading>{title}</StyledHeading>
+            <DateInfo>{created}</DateInfo>
             {cardType === 'twitter' && (
-                <StyledAvatar src="https://source.unsplash.com/random/100x100" />
+                <StyledAvatar
+                    src={`https://avatars.io/twitter/${twitterName}`}
+                />
             )}
-            {cardType === 'article' && (
-                <StyledLinkButton href="https://google.com/" />
-            )}
+            {cardType === 'article' && <StyledLinkButton href={articleUrl} />}
         </InnerWrapper>
         <InnerWrapper flex>
-            <Paragraph>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Adipisci veniam itaque, deserunt a debitis numquam hic rem cum
-                soluta ex beatae ad dolore rerum veritatis aliquid. Iure
-                deleniti a dolor!
-            </Paragraph>
+            <Paragraph>{content}</Paragraph>
             <Button secondary>Remove</Button>
         </InnerWrapper>
     </StyledWrapper>
@@ -95,10 +98,17 @@ const Card = ({ cardType }) => (
 
 Card.propTypes = {
     cardType: PropTypes.oneOf(['note', 'twitter', 'article']),
+    title: PropTypes.string.isRequired,
+    created: PropTypes.string.isRequired,
+    twitterName: PropTypes.string,
+    articleUrl: PropTypes.string,
+    content: PropTypes.string.isRequired,
 };
 
 Card.defaultProps = {
     cardType: 'note',
+    twitterName: null,
+    articleUrl: null,
 };
 
 export default Card;
