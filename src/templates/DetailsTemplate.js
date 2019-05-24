@@ -6,6 +6,7 @@ import Paragraph from 'components/atoms/Paragraph/Paragraph';
 import Heading from 'components/atoms/Heading/Heading';
 import Button from 'components/atoms/Button/Button';
 import LinkIcon from 'assets/icons/link.svg';
+import withContext from 'hoc/withContext';
 import UserPageTemplate from './UserPageTemplate';
 
 const StyledWrapper = styled.div`
@@ -96,20 +97,20 @@ const StyledButtonLink = styled(Link)`
 `;
 
 const CardDetails = ({
-    pageType,
+    pageContext,
     title,
     created,
     twitterName,
     articleUrl,
     content,
 }) => (
-    <UserPageTemplate pageType={pageType}>
+    <UserPageTemplate>
         <StyledWrapper>
-            <InnerWrapper activeColor={pageType}>
+            <InnerWrapper activeColor={pageContext}>
                 <StyledHeading big>{title}</StyledHeading>
                 <DateInfo>{created}</DateInfo>
-                {pageType === 'articles' && <StyledLinkCircle />}
-                {pageType === 'twitters' && (
+                {pageContext === 'articles' && <StyledLinkCircle />}
+                {pageContext === 'twitters' && (
                     <StyledAvatar
                         src={`https://avatars.io/twitter/${twitterName}`}
                     />
@@ -117,7 +118,7 @@ const CardDetails = ({
             </InnerWrapper>
             <InnerWrapper flex>
                 <Paragraph>{content}</Paragraph>
-                {pageType === 'articles' && (
+                {pageContext === 'articles' && (
                     <StyledExtLink
                         href={articleUrl}
                         target="_blank"
@@ -126,7 +127,7 @@ const CardDetails = ({
                         Go to the Article
                     </StyledExtLink>
                 )}
-                {pageType === 'twitters' && (
+                {pageContext === 'twitters' && (
                     <StyledExtLink
                         href={`https://twitter.com/${twitterName}`}
                         target="_blank"
@@ -135,8 +136,8 @@ const CardDetails = ({
                         Go to the Profile
                     </StyledExtLink>
                 )}
-                <StyledButtonLink to={`/${pageType}`}>
-                    <Button activeColor={pageType}>Save / Close</Button>
+                <StyledButtonLink to={`/${pageContext}`}>
+                    <Button activeColor={pageContext}>Save / Close</Button>
                 </StyledButtonLink>
             </InnerWrapper>
         </StyledWrapper>
@@ -144,7 +145,7 @@ const CardDetails = ({
 );
 
 CardDetails.propTypes = {
-    pageType: PropTypes.oneOf(['notes', 'twitters', 'articles']),
+    pageContext: PropTypes.oneOf(['notes', 'twitters', 'articles']),
     title: PropTypes.string.isRequired,
     created: PropTypes.string.isRequired,
     twitterName: PropTypes.string,
@@ -153,9 +154,9 @@ CardDetails.propTypes = {
 };
 
 CardDetails.defaultProps = {
-    pageType: 'notes',
+    pageContext: 'notes',
     twitterName: null,
     articleUrl: null,
 };
 
-export default CardDetails;
+export default withContext(CardDetails);

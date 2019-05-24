@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { removeItem as removeItemAction } from 'actions';
 import styled, { css } from 'styled-components';
 import Paragraph from 'components/atoms/Paragraph/Paragraph';
 import Heading from 'components/atoms/Heading/Heading';
 import Button from 'components/atoms/Button/Button';
 import LinkIcon from 'assets/icons/link.svg';
+import withContext from 'hoc/withContext';
 
 const StyledWrapper = styled.div`
     border-radius: 5px;
@@ -111,35 +114,41 @@ class Card extends Component {
         const { redirect } = this.state;
         const {
             id,
-            cardType,
+            pageContext,
             title,
             created,
             twitterName,
             content,
+            removeItem,
         } = this.props;
 
         if (redirect) {
-            return <Redirect to={`${cardType}/${id}`} />;
+            return <Redirect to={`${pageContext}/${id}`} />;
         }
 
         return (
             <StyledWrapper>
                 <InnerWrapper
-                    activeColor={cardType}
+                    activeColor={pageContext}
                     onClick={this.handleCardClick}
                 >
                     <StyledHeading as="h2">{title}</StyledHeading>
                     <DateInfo>{created}</DateInfo>
-                    {cardType === 'articles' && <StyledLinkCircle />}
+                    {pageContext === 'articles' && <StyledLinkCircle />}
                 </InnerWrapper>
-                {cardType === 'twitters' && (
+                {pageContext === 'twitters' && (
                     <StyledAvatar
                         src={`https://avatars.io/twitter/${twitterName}`}
                     />
                 )}
                 <InnerWrapper flex>
                     <Paragraph>{content}</Paragraph>
-                    <StyledButton secondary>Remove</StyledButton>
+                    <StyledButton
+                        secondary
+                        onClick={() => removeItem(pageContext, id)}
+                    >
+                        Remove
+                    </StyledButton>
                 </InnerWrapper>
             </StyledWrapper>
         );
@@ -148,16 +157,24 @@ class Card extends Component {
 
 Card.propTypes = {
     id: PropTypes.number.isRequired,
-    cardType: PropTypes.oneOf(['notes', 'twitters', 'articles']),
+    pageContext: PropTypes.oneOf(['notes', 'twitters', 'articles']),
     title: PropTypes.string.isRequired,
     created: PropTypes.string.isRequired,
     twitterName: PropTypes.string,
     content: PropTypes.string.isRequired,
+    removeItem: PropTypes.func.isRequired,
 };
 
 Card.defaultProps = {
-    cardType: 'notes',
+    pageContext: 'notes',
     twitterName: null,
 };
 
-export default Card;
+const mapDispatchToProps = dispatch => ({
+    removeItem: (itemType, id) => dispatch(removeItemAction(itemType, id)),
+});
+
+export default connect(
+    null,
+    mapDispatchToProps,
+)(withContext(Card));
