@@ -12,6 +12,7 @@ const Button = styled.button`
     font-weight: ${({ theme }) => theme.bold};
     font-size: ${({ theme }) => theme.fontSize.s};
     text-transform: uppercase;
+    flex-shrink: 0;
     cursor: pointer;
 
     ${({ secondary }) =>

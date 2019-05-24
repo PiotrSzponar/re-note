@@ -1,28 +1,28 @@
 const initialState = {
     notes: [
         {
-            id: 1,
+            id: '1',
             title: 'Wake me up when Vue ends',
             content:
                 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
             created: '1 day',
         },
         {
-            id: 2,
+            id: '2',
             title: 'Como es An Gular?',
             content:
                 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
             created: '1 day',
         },
         {
-            id: 3,
+            id: '3',
             title: 'Du bist Reactish',
             content:
                 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
             created: '5 days',
         },
         {
-            id: 4,
+            id: '4',
             title: 'Reactuj się kto moze!',
             content:
                 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
@@ -31,41 +31,37 @@ const initialState = {
     ],
     twitters: [
         {
-            id: 1,
-            title: 'Wesbos is the Boss!',
+            id: '1',
             content:
                 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
             created: '1 day',
-            twitterName: 'wesbos',
+            title: 'wesbos',
         },
         {
-            id: 2,
-            title: 'Redux guy',
+            id: '2',
             content:
                 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
             created: '1 day',
-            twitterName: 'dan_abramov',
+            title: 'dan_abramov',
         },
         {
-            id: 3,
-            title: 'React router stuff',
+            id: '3',
             content:
                 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
             created: '5 days',
-            twitterName: 'mjackson',
+            title: 'mjackson',
         },
         {
-            id: 4,
-            title: 'Super animacje!',
+            id: '4',
             content:
                 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
             created: '10 days',
-            twitterName: 'sarah_edo',
+            title: 'sarah_edo',
         },
     ],
     articles: [
         {
-            id: 1,
+            id: '1',
             title: 'React on my mind',
             content:
                 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
@@ -73,7 +69,7 @@ const initialState = {
             created: '1 day',
         },
         {
-            id: 2,
+            id: '2',
             title: 'Wish you React',
             content:
                 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
@@ -81,7 +77,7 @@ const initialState = {
             created: '1 day',
         },
         {
-            id: 3,
+            id: '3',
             title: 'You gave React a bad name',
             content:
                 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
@@ -89,7 +85,7 @@ const initialState = {
             created: '5 days',
         },
         {
-            id: 4,
+            id: '4',
             title: 'Is it React you looking for?',
             content:
                 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
@@ -101,6 +97,14 @@ const initialState = {
 
 const rootReducer = (state = initialState, action) => {
     switch (action.type) {
+        case 'ADD_ITEM':
+            return {
+                ...state,
+                [action.payload.itemType]: [
+                    ...state[action.payload.itemType],
+                    action.payload.item,
+                ],
+            };
         case 'REMOVE_ITEM':
             return {
                 ...state,

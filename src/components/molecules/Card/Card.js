@@ -106,18 +106,25 @@ const StyledButton = styled(Button)`
 class Card extends Component {
     state = {
         redirect: false,
+        twitterName: '',
     };
+
+    componentDidMount() {
+        const { title } = this.props;
+        this.setState({
+            twitterName: title,
+        });
+    }
 
     handleCardClick = () => this.setState({ redirect: true });
 
     render() {
-        const { redirect } = this.state;
+        const { redirect, twitterName } = this.state;
         const {
             id,
             pageContext,
             title,
             created,
-            twitterName,
             content,
             removeItem,
         } = this.props;
@@ -132,7 +139,9 @@ class Card extends Component {
                     activeColor={pageContext}
                     onClick={this.handleCardClick}
                 >
-                    <StyledHeading as="h2">{title}</StyledHeading>
+                    <StyledHeading as="h2">
+                        {pageContext === 'twitters' ? `@${title}` : title}
+                    </StyledHeading>
                     <DateInfo>{created}</DateInfo>
                     {pageContext === 'articles' && <StyledLinkCircle />}
                 </InnerWrapper>
@@ -156,18 +165,16 @@ class Card extends Component {
 }
 
 Card.propTypes = {
-    id: PropTypes.number.isRequired,
     pageContext: PropTypes.oneOf(['notes', 'twitters', 'articles']),
+    id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     created: PropTypes.string.isRequired,
-    twitterName: PropTypes.string,
     content: PropTypes.string.isRequired,
     removeItem: PropTypes.func.isRequired,
 };
 
 Card.defaultProps = {
     pageContext: 'notes',
-    twitterName: null,
 };
 
 const mapDispatchToProps = dispatch => ({

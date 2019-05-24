@@ -96,11 +96,10 @@ const StyledButtonLink = styled(Link)`
     margin: 50px 0 0 0;
 `;
 
-const CardDetails = ({
+const DetailsTemplate = ({
     pageContext,
     title,
     created,
-    twitterName,
     articleUrl,
     content,
 }) => (
@@ -111,9 +110,7 @@ const CardDetails = ({
                 <DateInfo>{created}</DateInfo>
                 {pageContext === 'articles' && <StyledLinkCircle />}
                 {pageContext === 'twitters' && (
-                    <StyledAvatar
-                        src={`https://avatars.io/twitter/${twitterName}`}
-                    />
+                    <StyledAvatar src={`https://avatars.io/twitter/${title}`} />
                 )}
             </InnerWrapper>
             <InnerWrapper flex>
@@ -124,16 +121,16 @@ const CardDetails = ({
                         target="_blank"
                         rel="noopener noreferrer"
                     >
-                        Go to the Article
+                        Go to the article
                     </StyledExtLink>
                 )}
                 {pageContext === 'twitters' && (
                     <StyledExtLink
-                        href={`https://twitter.com/${twitterName}`}
+                        href={`https://twitter.com/${title}`}
                         target="_blank"
                         rel="noopener noreferrer"
                     >
-                        Go to the Profile
+                        Go to the profile
                     </StyledExtLink>
                 )}
                 <StyledButtonLink to={`/${pageContext}`}>
@@ -144,19 +141,17 @@ const CardDetails = ({
     </UserPageTemplate>
 );
 
-CardDetails.propTypes = {
+DetailsTemplate.propTypes = {
     pageContext: PropTypes.oneOf(['notes', 'twitters', 'articles']),
     title: PropTypes.string.isRequired,
     created: PropTypes.string.isRequired,
-    twitterName: PropTypes.string,
     articleUrl: PropTypes.string,
     content: PropTypes.string.isRequired,
 };
 
-CardDetails.defaultProps = {
+DetailsTemplate.defaultProps = {
     pageContext: 'notes',
-    twitterName: null,
     articleUrl: null,
 };
 
-export default withContext(CardDetails);
+export default withContext(DetailsTemplate);

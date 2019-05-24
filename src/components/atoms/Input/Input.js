@@ -3,6 +3,7 @@ import magnifierIcon from 'assets/icons/magnifier.svg';
 
 const Input = styled.input`
     padding: 15px 30px;
+    font-family: inherit;
     font-size: ${({ theme }) => theme.fontSize.s};
     font-weight: ${({ theme }) => theme.regular};
     background-color: ${({ theme }) => theme.grey100};

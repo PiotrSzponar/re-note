@@ -45,6 +45,10 @@ const StyledLinksList = styled.ul`
     list-style: none;
 `;
 
+const StyledButtonIcon = styled(ButtonIcon)`
+    background-size: 32%;
+`;
+
 const Sidebar = ({ pageContext }) => (
     <StyledWrapper activeColor={pageContext}>
         <StyledLogoLink to="/" />
@@ -66,7 +70,7 @@ const Sidebar = ({ pageContext }) => (
                 />
             </li>
             <li>
-                <ButtonIcon
+                <StyledButtonIcon
                     as={NavLink}
                     to="/articles"
                     icon={bulbIcon}
