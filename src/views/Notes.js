@@ -1,27 +1,31 @@
 import React from 'react';
-import UserPageTemplate from 'templates/UserPageTemplate';
+import GridTemplate from 'templates/GridTemplate';
 import Card from 'components/molecules/Card/Card';
 
 const notesData = [
     {
+        id: 1,
         title: 'Wake me up when Vue ends',
         content:
             'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
         created: '1 day',
     },
     {
+        id: 2,
         title: 'Como es An Gular?',
         content:
             'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
         created: '1 day',
     },
     {
+        id: 3,
         title: 'Du bist Reactish',
         content:
             'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
         created: '5 days',
     },
     {
+        id: 4,
         title: 'Reactuj się kto moze!',
         content:
             'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
@@ -30,19 +34,18 @@ const notesData = [
 ];
 
 const Notes = () => (
-    <UserPageTemplate pageType="note">
-        <>
-            {notesData.map(item => (
-                <Card
-                    cardType="note"
-                    title={item.title}
-                    created={item.created}
-                    content={item.content}
-                    key={item.title}
-                />
-            ))}
-        </>
-    </UserPageTemplate>
+    <GridTemplate pageType="notes">
+        {notesData.map(({ id, title, created, content }) => (
+            <Card
+                id={id}
+                cardType="notes"
+                title={title}
+                created={created}
+                content={content}
+                key={id}
+            />
+        ))}
+    </GridTemplate>
 );
 
 export default Notes;

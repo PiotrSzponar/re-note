@@ -17,7 +17,7 @@ const StyledWrapper = styled.div`
     left: 0;
     top: 0;
     background-color: ${({ activeColor, theme }) =>
-        activeColor ? theme[activeColor] : theme.note};
+        activeColor ? theme[activeColor] : theme.notes};
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -50,9 +50,8 @@ const Sidebar = ({ pageType }) => (
         <StyledLinksList>
             <li>
                 <ButtonIcon
-                    exact
                     as={NavLink}
-                    to="/"
+                    to="/notes"
                     icon={penIcon}
                     activeclass="active"
                 />
@@ -79,11 +78,11 @@ const Sidebar = ({ pageType }) => (
 );
 
 Sidebar.propTypes = {
-    pageType: PropTypes.oneOf(['note', 'twitter', 'article']),
+    pageType: PropTypes.oneOf(['notes', 'twitters', 'articles']),
 };
 
 Sidebar.defaultProps = {
-    pageType: 'note',
+    pageType: 'notes',
 };
 
 export default Sidebar;

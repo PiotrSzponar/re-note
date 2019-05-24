@@ -14,13 +14,13 @@ const YellowBg = styled.div`
     align-items: center;
     width: 500px;
     height: 500px;
-    background-color: ${({ theme }) => theme.note};
+    background-color: ${({ theme }) => theme.notes};
 `;
 
 storiesOf('Atoms/Button Icon', module)
     .addDecorator(story => <YellowBg>{story()}</YellowBg>)
     .add('Bulb', () => <ButtonIcon icon={bulbIcon} />)
-    .add('Bulb Active', () => <ButtonIcon icon={bulbIcon} active />)
+    .add('Bulb Active', () => <ButtonIcon icon={bulbIcon} className="active" />)
     .add('Logout', () => <ButtonIcon icon={logoutIcon} />)
     .add('Pen', () => <ButtonIcon icon={penIcon} />)
     .add('Plus', () => <ButtonIcon icon={plusIcon} />)

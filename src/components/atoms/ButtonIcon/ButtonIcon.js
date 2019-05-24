@@ -5,6 +5,7 @@ const ButtonIcon = styled.button`
     width: 70px;
     height: 70px;
     border-radius: 50%;
+    background-color: transparent;
     background-image: url(${({ icon }) => icon});
     background-repeat: no-repeat;
     background-position: 50% 50%;

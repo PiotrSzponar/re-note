@@ -3,7 +3,8 @@ import styled, { css } from 'styled-components';
 const Button = styled.button`
     width: 220px;
     height: 50px;
-    background-color: ${({ theme }) => theme.note};
+    background-color: ${({ theme, activeColor }) =>
+        activeColor ? theme[activeColor] : theme.grey200};
     padding: 0;
     border: none;
     border-radius: 50px;

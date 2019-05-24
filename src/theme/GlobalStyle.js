@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
+import { theme } from 'theme/mainTheme';
 
 const GlobalStyle = createGlobalStyle`
     @import url('https://fonts.googleapis.com/css?family=Montserrat:300,600&display=swap');
@@ -20,6 +21,8 @@ const GlobalStyle = createGlobalStyle`
         font-family: 'Montserrat', sans-serif;
         font-size: 1.6rem;
         line-height: 1.5;
+        background-color: ${theme.grey50};
+        color: ${theme.black};
     }
 `;
 
