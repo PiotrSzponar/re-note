@@ -45,6 +45,11 @@ const StyledButtonIcon = styled(ButtonIcon)`
     bottom: 40px;
     right: 40px;
     z-index: 10;
+    outline: none;
+    transform: rotate(
+        ${({ isNewItemFormVisible }) => (isNewItemFormVisible ? '135deg' : '0')}
+    );
+    transition: transform 0.3s;
 `;
 
 class GridTemplate extends Component {
@@ -75,6 +80,7 @@ class GridTemplate extends Component {
                         icon={plusIcon}
                         activeColor={pageContext}
                         onClick={this.toggleNewItemForm}
+                        isNewItemFormVisible={isNewItemFormVisible}
                     />
                     <NewItemForm
                         handleClose={this.toggleNewItemForm}

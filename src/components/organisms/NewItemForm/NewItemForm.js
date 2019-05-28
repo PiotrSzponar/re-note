@@ -27,6 +27,17 @@ const StyledWrapper = styled.div`
             isVisible ? 'rgba(0, 0, 0, 0.1)' : 'rgba(0, 0, 0, 0)'};
     transform: translateX(${({ isVisible }) => (isVisible ? '0' : '100%')});
     transition: transform 0.3s;
+
+    ::after {
+        content: 'CLOSE';
+        position: absolute;
+        bottom: 63px;
+        right: 120px;
+        font-weight: ${({ theme }) => theme.bold};
+        opacity: ${({ isVisible }) => (isVisible ? '1' : '0')};
+        visibility: ${({ isVisible }) => (isVisible ? 'visible' : 'hidden')};
+        transition: opacity 0.3s 0.15s;
+    }
 `;
 
 const StyledHeading = styled(Heading)`
